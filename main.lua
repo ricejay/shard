@@ -4,14 +4,20 @@ if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") and not game
     return
 end
 
-loadstring(readfile("modules/eventShopModifier.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/eventShopModifier.lua"))()
 
 task.wait(5)
 
-local OrionLib = loadstring(game:HttpGet("https://twix.cyou/Orion.txt", true))()
-local Window = OrionLib:MakeWindow({
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+local player = players["LocalPlayer"]
+
+local orionLib = loadstring(game:HttpGet("https://twix.cyou/Orion.txt", true))()
+local window = orionLib:MakeWindow({
     Name = "shard", 
     TestMode = false, 
     SaveConfig = true, 
     ConfigFolder = "shard_configs"
 })
+
