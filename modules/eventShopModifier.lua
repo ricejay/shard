@@ -5,6 +5,6 @@ for _, item in next, eventShopModule do
         item["DisplayInShop"] = true
         print(item["SeedName"].. ": loaded!")
     else
-        warn(item["SeedName"].. " cannot find!")
+        warn(item["SeedName"].. " already loaded!")
     end
 end
