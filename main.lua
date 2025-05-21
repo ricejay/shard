@@ -4,7 +4,7 @@ if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") and not game
     return
 end
 
-
+loadstring(readfile("modules/eventShopModifier.lua"))()
 
 task.wait(5)
 
