@@ -23,7 +23,7 @@ local window = orionLib:MakeWindow({
     Name = "shard", 
     TestMode = false, 
     SaveConfig = true, 
-    Icon = assets["mainIcon"],
+    Icon = assetLib["shardIcon"],
     ConfigFolder = "shard_configs"
 })
 
@@ -67,14 +67,14 @@ tabTest:AddButton({
             orionLib:MakeNotification({
                 Name = "Shard",
                 Content = "Server is Old ✅\n\nServer Version: "..game.PlaceVersion,
-                Image = assets["mainIcon"],
+                Image = assetLib["shardIcon"],
                 Time = 5
             })
         else
             orionLib:MakeNotification({
                 Name = "Shard",
                 Content = "Server is not Old ❎\n\nServer Version: "..game.PlaceVersion,
-                Image = assets["mainIcon"],
+                Image = assetLib["shardIcon"],
                 Time = 5
             })
         end
