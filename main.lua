@@ -1,21 +1,17 @@
 repeat task.wait() until game:IsLoaded()
 
-if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") and not game:GetService("Players").LocalPlayer.PlayerGui.Intro_SCREEN:FindFirstChild("Frame").Loaded.Value == 2500 then
-    return
-end
-
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/eventShopModifier.lua"))()
-
-task.wait(5)
-
 local players = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local httpService = game:GetService("HttpService")
+local teleportService = game:GetService("TeleportService")
+local virtualUser = game:GetService("VirtualUser")
+local runService = game:GetService("RunService")
 
 local player = players.LocalPlayer
 local placeId = game.PlaceId
+local gameName = game:GetService("MarketplaceService"):GetProductInfo(placeId).Name
 
-local eventShopModule = require(replicatedStorage.Data.EventShopData)
+local seedData = require(replicatedStorage.Data.SeedData)
 
 local assetLib = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/assets.lua"))()
 local orionLib = loadstring(game:HttpGetAsync("https://twix.cyou/Orion.txt", true))()
@@ -27,56 +23,40 @@ local window = orionLib:MakeWindow({
     ConfigFolder = "shard_configs"
 })
 
-local tabTest = window:MakeTab({
-    Name = "Tab 1",
+local mainTab = window:MakeTab({
+    Name = "Main",
 	Icon = "",
 	TestersOnly = false
 })
 
-local function checkServerVersion()
-    local buggedItems = {
-        "Candy Blossom",
-        "Chocolate Sprinkler",
-        "Easter Egg",
-        "Candy Sunflower",
-        "Red Lollipop",
-        "Chocolate Carrot"
-    }
-
-    local isOld = false
-
-    for _, itemName in ipairs(buggedItems) do
-        local itemData = eventShopModule[itemName]
-        if itemData and itemData["StockChance"] and itemData["StockChance"] > 0 then
-            isOld = true
-            break
-        else
-            isOld = false
-            break
-        end
+local function getSeedNames()
+    local seedsTable = {}
+    for _, seed in next, seedData do
+        local fixedName = string.gsub(seed.SeedName, " Seed$", "")
+        table.insert(seedsTable, fixedName)
     end
-
-    return isOld
+    table.sort(seedsTable)
+    return seedsTable
 end
 
-tabTest:AddButton({
-    Name = "Check Server Version",
-    Callback = function()
-        local isOld = checkServerVersion()
-        if isOld then
-            orionLib:MakeNotification({
-                Name = "Shard",
-                Content = "Server is Old ✅\n\nServer Version: "..game.PlaceVersion,
-                Image = assetLib["shardIcon"],
-                Time = 5
-            })
-        else
-            orionLib:MakeNotification({
-                Name = "Shard",
-                Content = "Server is not Old ❎\n\nServer Version: "..game.PlaceVersion,
-                Image = assetLib["shardIcon"],
-                Time = 5
-            })
+task.spawn(function()
+    
+    mainTab:AddDropdown({
+        Name = "Select Seed",
+        Default = "",
+        Options = getSeedNames(),
+        Callback = function(selected)
+            print(selected)
         end
-    end
-})
+    })
+
+    runService.RenderStepped:Connect(function()
+        player.Idled:Connect(function()
+            print("[shard-debug]: user idled")
+            virtualUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            task.wait(1)
+            virtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        end)
+    end)
+
+end)

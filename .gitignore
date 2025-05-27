@@ -1,3 +1,5 @@
 .debugs/
 .gameModules/
+.others/
+.functions/
 loader.lua
