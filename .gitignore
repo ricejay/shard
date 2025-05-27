@@ -2,4 +2,5 @@
 .gameModules/
 .others/
 .functions/
+.backups/
 loader.lua
