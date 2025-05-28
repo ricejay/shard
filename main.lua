@@ -22,10 +22,10 @@ local mutations = replicatedStorage:WaitForChild("Mutation_FX")
 
 -- libraries
 local assetLib = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/assets/icons.lua"))()
-local rayField = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local rayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/assets/rayfield.lua'))()
 local window = rayField:CreateWindow({
-   Name = "shard | "..gameName,
-   Icon = assetLib["shardIcon"],
+   Name = "shard",
+   Icon = 116005003944281,
    LoadingTitle = "shard",
    LoadingSubtitle = "by ricevor",
    Theme = "Default",
@@ -39,7 +39,7 @@ local window = rayField:CreateWindow({
    },
 })
 
-local mainTab = window:CreateTab("Main", 0)
+local mainTab = window:CreateTab("Main", "")
 local farmModule = mainTab:CreateSection("Farm Module")
 
 local function pushAntiAfk()
@@ -98,7 +98,7 @@ task.spawn(function()
     local lastCollect = 0
     local collectCooldown = 0.2
 
-    farmModule:CreateDropdown({
+    mainTab:CreateDropdown({
         Name = "Select Plant To Collect",
         Options = getSeedNames(),
         CurrentOption = "None",
@@ -108,7 +108,7 @@ task.spawn(function()
         end
     })
 
-    farmModule:CreateDropdown({
+    mainTab:CreateDropdown({
         Name = "Select Mutations",
         Options = getMutationNames(),
         CurrentOption = "None",
@@ -118,7 +118,7 @@ task.spawn(function()
         end
     })
 
-    farmModule:CreateToggle({
+    mainTab:CreateToggle({
         Name = "Collect Fruit",
         CurrentValue = false,
         Callback = function(bool)
