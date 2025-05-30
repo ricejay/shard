@@ -5,7 +5,7 @@
 .backups/
 .modules/
 loader.lua
-.main
-.basic
-.fluent
-.vuln
+main
+basic
+fluent
+vuln
