@@ -52,7 +52,7 @@ task.spawn(function()
     pushAntiAfk()
 
     window:Dialog({
-        Title = "shard.nul",
+        Title = "shard.null",
         Content = "Join Our Discord!",
         Buttons = {
             { 
@@ -70,7 +70,7 @@ task.spawn(function()
     })
     tabs.mainTab:AddParagraph({
         Title = "Warning:",
-        Content = "[-] Do not use on main accoun.\n[-] You might get wiped or banned."
+        Content = "[-] Do not use on main account.\n[-] You might get wiped or banned."
     })
 
     local dupeShecks = tabs.mainTab:AddToggle("dupeShecks", {
