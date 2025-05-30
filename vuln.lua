@@ -53,7 +53,6 @@ end
 task.spawn(function()
     
     pushAntiAfk()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/runner.lua"))()
 
     window:Dialog({
         Title = "shard.null",
