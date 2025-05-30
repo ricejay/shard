@@ -74,16 +74,8 @@ task.spawn(function()
         Content = "[-] Do not use on main account.\n[-] You might get wiped or banned."
     })
 
-    local dupeShecks = tabs.mainTab:AddToggle("dupeShecks", {
-        Title = "Dupe Sheckles", 
-        Default = false,
-        Callback = function(bool)
-            getgenv().dupeSheckles = bool
-        end
-    })
-
     local dupeMultiplier = tabs.mainTab:AddSlider("dupeMultiplier", {
-        Title = "Dupe Multiplier",,
+        Title = "Dupe Multiplier",
         Description = "Dupe Multiplier for more sheckles (laggy)",
         Default = 1,
         Min = 1,
@@ -91,6 +83,14 @@ task.spawn(function()
         Rounding = 1,
         Callback = function(value)
             getgenv().dupeMultiplier = value
+        end
+    })
+
+    local dupeShecks = tabs.mainTab:AddToggle("dupeShecks", {
+        Title = "Dupe Sheckles", 
+        Default = false,
+        Callback = function(bool)
+            getgenv().dupeSheckles = bool
         end
     })
 
