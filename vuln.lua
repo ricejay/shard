@@ -21,6 +21,7 @@ local tabs = {
 local options = fluent.Options
 
 getgenv().dupeSheckles = false
+getgenv().dupeMultiplier = 1
 
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
@@ -81,34 +82,45 @@ task.spawn(function()
         end
     })
 
+    local dupeMultiplier = tabs.mainTab:AddSlider("dupeMultiplier", {
+        Title = "Dupe Multiplier",,
+        Description = "Dupe Multiplier for more sheckles (laggy)",
+        Default = 1,
+        Min = 1,
+        Max = 50,
+        Rounding = 1,
+        Callback = function()
+            
+        end
+    })
+
     runService.RenderStepped:Connect(function()
 
         if getgenv().dupeSheckles then
             for _, player in ipairs(players:GetPlayers()) do
                 if player ~= localPlayer then
-                    local function getCharacter(character)
-                        local function pushHandlePet(pet)
-                            if pet:GetAttribute("ItemType") == "Pet" then
-                                local rift = Workspace[player.Name]:FindFirstChild(pet.Name)
-                                if rift then
+                    local function handlePet(pet)
+                        if pet:GetAttribute("ItemType") == "Pet" then
+                            local rift = Workspace[player.Name]:FindFirstChild(pet.Name)
+                            if rift then
+                                for i = 1, getgenv().dupeMultiplier do
                                     sellPet_RE:FireServer(rift)
                                 end
                             end
                         end
+                    end
 
+                    local function monitorCharacter(character)
                         for _, child in ipairs(character:GetChildren()) do
-                            pushHandlePet(child)
+                            handlePet(child)
                         end
-
-                        character.ChildAdded:Connect(function(itemAdded)
-                            pushHandlePet(itemAdded)
-                        end)
+                        character.ChildAdded:Connect(handlePet)
                     end
 
                     if player.Character then
-                        getCharacter(player.Character)
+                        monitorCharacter(player.Character)
                     end
-                    player.CharacterAdded:Connect(getCharacter)
+                    player.CharacterAdded:Connect(monitorCharacter)
                 end
             end
         end
