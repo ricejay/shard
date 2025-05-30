@@ -77,7 +77,7 @@ task.spawn(function()
         Title = "Dupe Sheckles", 
         Default = false,
         Callback = function(bool)
-            dupeSheckles = bool
+            getgenv().dupeSheckles = bool
         end
     })
 
@@ -101,7 +101,7 @@ task.spawn(function()
                         end
 
                         character.ChildAdded:Connect(function(itemAdded)
-                            handlepushHandlePetPet(itemAdded)
+                            pushHandlePet(itemAdded)
                         end)
                     end
 
