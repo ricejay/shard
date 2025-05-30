@@ -89,8 +89,8 @@ task.spawn(function()
         Min = 1,
         Max = 50,
         Rounding = 1,
-        Callback = function()
-            
+        Callback = function(value)
+            getgenv().dupeMultiplier = value
         end
     })
 
