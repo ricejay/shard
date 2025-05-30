@@ -1,3 +1,5 @@
+repeat task.wait until game:IsLoaded()
+
 local fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local saveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local interfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -49,8 +51,9 @@ local function pushAntiAfk()
 end
 
 task.spawn(function()
-
+    
     pushAntiAfk()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ricejay/shard/refs/heads/main/modules/runner.lua"))()
 
     window:Dialog({
         Title = "shard.null",
