@@ -3,4 +3,9 @@
 .others/
 .functions/
 .backups/
+.modules/
 loader.lua
+.main
+.basic
+.fluent
+.vuln
