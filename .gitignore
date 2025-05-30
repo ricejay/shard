@@ -4,4 +4,6 @@
 .functions/
 .backups/
 .modules/
+.modules/assets/
+.modules/depricated/
 .bak/
