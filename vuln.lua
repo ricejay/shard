@@ -20,7 +20,7 @@ local tabs = {
 
 local options = fluent.Options
 
-local dupeSheckles = false
+getgenv().dupeSheckles = false
 
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
@@ -83,7 +83,7 @@ task.spawn(function()
 
     runService.RenderStepped:Connect(function()
 
-        if dupeSheckles then
+        if getgenv().dupeSheckles then
             for _, player in ipairs(players:GetPlayers()) do
                 if player ~= localPlayer then
                     local function getCharacter(character)
