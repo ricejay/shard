@@ -4,8 +4,4 @@
 .functions/
 .backups/
 .modules/
-loader.lua
-main.lua
-basic.lua
-fluent.lua
-vuln.lua
+.bak/
